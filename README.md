@@ -1,6 +1,6 @@
 # Desk Lamp Mounted Camera with Rolling Camera Buffer
 
-#WIP!!
+# WIP!!
 ## Overivew
 
 This project aims to create a simple and effective way to passivly record and store a video feed of a workspace. This is intended to allow for one to stay "in the flow", not worrying about visual documentation, while allowing retreval later.
