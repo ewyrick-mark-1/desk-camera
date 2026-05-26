@@ -1,0 +1,6 @@
+OpenCV starter guide:
+
+https://docs.opencv.org/2.4/doc/tutorials/introduction/linux_gcc_cmake/linux_gcc_cmake.html#linux-gcc-usage
+
+OpenCV API:
+https://docs.opencv.org/3.0-beta/modules/videoio/doc/reading_and_writing_video.html
