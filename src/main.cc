@@ -16,7 +16,7 @@ int main() {
 
 	if(frame.empty()) return -1;
 	
-	cv::imwrite("/mnt/myshare/img/image.png", frame);
+	cv::imwrite("/mnt/myshare/img/image.png", frame)g
 	std::cout << "open cv version: " << CV_VERSION <<std::endl;	
 		
 	return 0;
