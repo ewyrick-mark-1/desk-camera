@@ -1,6 +1,11 @@
 build/
 *.o
 *.a
-server/node_modules/
-server/dist/
-server/.env
+img/
+*.swp
+web-interface/server/node_modules/
+web-interface/server/dist/
+web-interface/server/.env
+web-interface/client/node_modules/
+web-interface/client/dist/
+web-interface/client/.env

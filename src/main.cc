@@ -1,6 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-
+#include <chrono>
 int main() {
 	std::cout << "Hello world" << std::endl;
 	
@@ -16,7 +16,9 @@ int main() {
 
 	if(frame.empty()) return -1;
 	
-	cv::imwrite("/mnt/myshare/img/image.png", frame)g
+	auto now = std::chrono::system_clock::now().time_since_epoch().count(); //unique file names
+	std::string path_name= "../img/" + std::to_string(now) + ".png";
+	cv::imwrite(path_name, frame);
 	std::cout << "open cv version: " << CV_VERSION <<std::endl;	
 		
 	return 0;
