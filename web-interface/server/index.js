@@ -19,7 +19,7 @@ app.use(cors())
 
 //pull list of files
 app.get('/files', (req, res) => {
-	const files = fs.readdirSync(IMG).filter(f => f.endsWith('.png'))
+	const files = fs.readdirSync(IMG).filter(f => f.endsWith('.png') || f.endsWith('.avi'))
 	res.json(files)
 })
 
@@ -31,7 +31,7 @@ app.get('/files/:filename', (req, res) => {
 
 //take an img
 app.get('/run', (req, res) => {
-	exec('./cam', { cwd: path.join(__dirname, '../../build/') }, (error, stdout, stderr) => {
+	exec('./cam --img', { cwd: path.join(__dirname, '../../build/') }, (error, stdout, stderr) => {
 		if(error){
 			return res.status(500).json({ error: error.message, stderr});
 		}
