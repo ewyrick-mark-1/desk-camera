@@ -32,9 +32,15 @@ int main(int argc, char* argv[]) {
 
 	} else if (mode == "--video") {
 		int fps = 30;
+		int duration = 10; //default
 		int width = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
 		int height = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
-
+		
+		if (argc > 2){
+			duration = std::stoi(argv[2]);
+		}
+		
+		
 		std::string path_name = "../img/" + std::to_string(now) + ".avi";
 
 		// video writer
@@ -52,11 +58,16 @@ int main(int argc, char* argv[]) {
 		}
 
 		std::cout << "recording. ctrl c to stop." <<std::endl;
+		auto start = std::chrono::steady_clock::now();
 		cv::Mat frame;
 		while (true){
 			cap >> frame;
 			if (frame.empty()) break;
 			writer.write(frame); //add actual frame to the video
+			auto elapsed  = std::chrono::steady_clock::now() - start;
+			if(std::chrono::duration_cast<std::chrono::seconds>(elapsed).count() >= duration){
+				break;
+			}
 		}
 		writer.release();
 		std::cout << "Saved video: " << path_name << std::endl;

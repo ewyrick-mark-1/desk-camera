@@ -29,15 +29,26 @@ app.get('/files/:filename', (req, res) => {
 	res.sendFile(filePath)
 })
 
-//take an img
+//take an img or video
 app.get('/run', (req, res) => {
-	exec('./cam --img', { cwd: path.join(__dirname, '../../build/') }, (error, stdout, stderr) => {
+	
+	//add a command whitelist if ever exposed online.
+	const flag = req.query.flag || `--pic`; //pic is fallback
+	console.log('received flag:', flag);
+	console.log('running command:', `./cam ${flag}` );
+	
+	const args = flag.split(' ');
+	//const command = `./cam ${args.join(' ')}`;
+	const command = `./cam ${flag}`;
+	exec(command, { cwd: path.join(__dirname, '../../build/') }, (error, stdout, stderr) => {
 		if(error){
 			return res.status(500).json({ error: error.message, stderr});
 		}
 		res.json({ stdout, stderr });
 	})
 })
+
+
 
 //SOCKET.IO - webhooks w named events
 
