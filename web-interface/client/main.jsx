@@ -35,7 +35,7 @@ function App() {
 		<div>
 			<h1>Desk Camera</h1>
 			<button onClick={runPic}>Take Image</button>
-			{output && <p>{output}</p>}
+			//{output && <p>{output}</p>}
 			<input
 				value={duration}
 				onChange={e => setDuration(e.target.value)}
@@ -43,10 +43,18 @@ function App() {
 			/>
 			<button onClick={runVideo}>Take Video</button>
 			<ul>
-				{files.map(file => (
-					<li key={file}>
-						<a href={`${API}/files/${file}`} download>{file}</a>
-					</li>
+				{Object.entries(files).map(([date, dateFiles]) => (
+					<div key={date}>
+						<p>{date}</p>
+						<hr />
+						<div className="grid">
+							{dateFiles.map(file => (
+								<div key={file}>
+								<a href={`${API}/files/${date}/${file}`} download>{file}</a>
+								</div>
+							))}
+						</div>
+					</div>
 				))}
 			</ul>
 		</div>	

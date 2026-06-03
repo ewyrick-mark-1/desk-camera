@@ -19,13 +19,21 @@ app.use(cors())
 
 //pull list of files
 app.get('/files', (req, res) => {
-	const files = fs.readdirSync(IMG).filter(f => f.endsWith('.png') || f.endsWith('.avi'))
-	res.json(files)
+	const dates = fs.readdirSync(IMG)
+		.filter(f => fs.statSync(path.join(IMG, f)).isDirectory())
+		.sort().reverse();
+	const grouped = {};
+	dates.forEach(date => {
+		grouped[date] = fs.readdirSync(path.join(IMG, date))
+			.filter(f => f.endsWith('.png') || f.endsWith('.mp4'));
+	});
+	res.json(grouped);
+
 })
 
-//serve an img
-app.get('/files/:filename', (req, res) => {
-	const filePath = path.join(IMG, req.params.filename)
+//serve a file
+app.get('/files/:date/:filename', (req, res) => {
+	const filePath = path.join(IMG, req.params.date, req.params.filename)
 	res.sendFile(filePath)
 })
 
